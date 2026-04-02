@@ -128,7 +128,6 @@ export default function Site() {
           <div style={{ color: 'rgba(255,255,255,0.7)', fontWeight: 600, marginBottom: 8, fontFamily: "'Noto Serif TC', serif" }}>
             陪你讀判決
           </div>
-          <p style={{ margin: '0 0 4px' }}>時代力量黨工下班後企劃</p>
           <p style={{ margin: '0 0 4px' }}>資料來源：臺北地院刑事科 YouTube</p>
           <p style={{ margin: 0 }}>逐字稿由 AI 自動轉錄並經人名校正，內容僅供參考</p>
         </footer>

@@ -37,7 +37,7 @@ export default function Landing() {
             fontSize: 13, letterSpacing: '0.2em', color: 'rgba(255,255,255,0.5)',
             textTransform: 'uppercase', marginBottom: 20, fontWeight: 500,
           }}>
-            時代力量黨工下班後企劃
+            113年度金訴字第51號
           </div>
           <h1 style={{
             fontSize: 'clamp(36px, 6vw, 56px)', fontWeight: 800, margin: '0 0 16px',
