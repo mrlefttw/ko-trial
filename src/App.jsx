@@ -668,70 +668,7 @@ export default function App() {
               );
             })}
 
-            <span style={{ fontSize: '11px', color: 'var(--color-text-muted)', marginLeft: 'auto', fontFamily: 'var(--font-mono)' }}>
-              {filteredParaCount} / {totalParaCount} 段
-              {isGlobalSearch && !allLoaded && ' (載入中...)'}
-            </span>
-
-            {!isGlobalSearch && (
-              <>
-                <button onClick={() => {
-                  const keys = filteredCurrentItems.filter(i => i.type === 'para').map(i => i.paraKey);
-                  setExpandedItems(new Set(keys));
-                }} style={{
-                  fontSize: '11px', padding: '5px 12px', borderRadius: 8,
-                  border: 'none', background: 'rgba(0,0,0,0.04)', cursor: 'pointer',
-                  color: 'var(--color-text-secondary)', fontFamily: 'var(--font-ui)',
-                  transition: 'all 0.15s',
-                }}>
-                  全部展開
-                </button>
-                <button onClick={() => setExpandedItems(new Set())}
-                  style={{
-                    fontSize: '11px', padding: '5px 12px', borderRadius: 8,
-                    border: 'none', background: 'rgba(0,0,0,0.04)', cursor: 'pointer',
-                    color: 'var(--color-text-secondary)', fontFamily: 'var(--font-ui)',
-                    transition: 'all 0.15s',
-                  }}>
-                  全部收合
-                </button>
-                <SectionNav sections={sectionNav} />
-              </>
-            )}
-
-            <button onClick={() => setShowStats(!showStats)} style={{
-              fontSize: '11px', padding: '5px 12px', borderRadius: 8,
-              border: 'none',
-              background: showStats ? '#ffe600' : 'rgba(0,0,0,0.04)',
-              cursor: 'pointer', color: showStats ? '#1d1d1f' : 'var(--color-text-secondary)',
-              fontFamily: 'var(--font-ui)', fontWeight: showStats ? 600 : 400,
-              transition: 'all 0.15s',
-            }}>統計</button>
           </div>
-
-          {/* Stats */}
-          {showStats && (
-            <div style={{ marginTop: '10px', padding: '14px 16px', background: 'rgba(255,255,255,0.6)', backdropFilter: 'blur(12px)', WebkitBackdropFilter: 'blur(12px)', borderRadius: 12, border: '1px solid rgba(0,0,0,0.04)' }}>
-              <div style={{ fontSize: '11px', color: 'var(--color-text-secondary)', marginBottom: '8px', fontWeight: 600 }}>
-                發言統計 {isGlobalSearch && '（搜尋結果）'}
-              </div>
-              {speakers.filter(s => stats.count[s]).map(s => {
-                const conf = SPEAKERS[s] || SPEAKERS['檢察官'];
-                const pct = totalChars > 0 ? Math.round((stats.chars[s] / totalChars) * 100) : 0;
-                return (
-                  <div key={s} style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '4px' }}>
-                    <span style={{ fontSize: '12px', width: '60px', color: conf.accent, fontWeight: 600 }}>{conf.icon} {s}</span>
-                    <div style={{ flex: 1, height: '6px', background: 'var(--color-border-light)', borderRadius: '3px', overflow: 'hidden' }}>
-                      <div style={{ width: `${pct}%`, height: '100%', background: conf.accent, borderRadius: '3px', transition: 'width 0.3s' }} />
-                    </div>
-                    <span style={{ fontSize: '11px', color: 'var(--color-text-muted)', width: '80px', textAlign: 'right', fontFamily: 'var(--font-mono)' }}>
-                      {stats.count[s]}段 {pct}%
-                    </span>
-                  </div>
-                );
-              })}
-            </div>
-          )}
         </div>
       </div>
 
