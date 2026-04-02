@@ -11,6 +11,30 @@
       "paragraphs": [
         {
           "speaker": "審判長",
+          "start": 0,
+          "end": 7,
+          "start_ts": "00:00:00",
+          "end_ts": "00:00:07",
+          "text": "以下為公開播送。本院113年度金訴字第51號，"
+        },
+        {
+          "speaker": "審判長",
+          "start": 8,
+          "end": 21,
+          "start_ts": "00:00:08",
+          "end_ts": "00:00:21",
+          "text": "被告柯文哲等，違反貪污治罪條例等案件。本院判決如下。"
+        },
+        {
+          "speaker": "審判長",
+          "start": 22,
+          "end": 29,
+          "start_ts": "00:00:22",
+          "end_ts": "00:00:29",
+          "text": "主文，一、柯文哲犯貪污治罪條例之違背職務收受賄賂罪，"
+        },
+        {
+          "speaker": "審判長",
           "start": 30,
           "end": 58,
           "start_ts": "00:00:30",
@@ -36,5 +60,5 @@
       ]
     }
   ],
-  "total_paragraphs": 3
+  "total_paragraphs": 6
 }
