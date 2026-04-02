@@ -65,6 +65,25 @@ function Nav() {
   );
 }
 
+function ViewCounter() {
+  const [count, setCount] = useState(null);
+
+  useEffect(() => {
+    fetch('/api/views', { method: 'POST' })
+      .then(r => r.json())
+      .then(d => setCount(d.count))
+      .catch(() => {});
+  }, []);
+
+  if (count === null) return null;
+
+  return (
+    <span style={{ fontSize: 12, color: '#aaa' }}>
+      {count.toLocaleString()} 次瀏覽
+    </span>
+  );
+}
+
 export default function Site() {
   return (
     <>
@@ -105,7 +124,8 @@ export default function Site() {
           陪你聽判決
         </div>
         <p style={{ margin: '0 0 4px' }}>資料來源：臺北地院刑事科 YouTube</p>
-        <p style={{ margin: 0 }}>逐字稿由 AI 自動轉錄並經人名校正，內容僅供參考</p>
+        <p style={{ margin: '0 0 8px' }}>逐字稿由 AI 自動轉錄並經人名校正，內容僅供參考</p>
+        <ViewCounter />
       </footer>
     </>
   );
