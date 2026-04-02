@@ -9,7 +9,7 @@ export default async function handler(req, res) {
     const token = process.env.UPSTASH_REDIS_REST_TOKEN || process.env.KV_REST_API_TOKEN || '';
 
     if (!url || !token) {
-      return res.json({ count: 0, debug: 'missing env vars', keys: Object.keys(process.env).filter(k => k.includes('UPSTASH') || k.includes('KV') || k.includes('REDIS')).join(',') });
+      return res.json({ count: 0 });
     }
 
     const redis = new Redis({ url, token });

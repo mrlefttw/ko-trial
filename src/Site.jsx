@@ -69,10 +69,15 @@ function ViewCounter() {
   const [count, setCount] = useState(null);
 
   useEffect(() => {
-    fetch('/api/views', { method: 'POST' })
-      .then(r => r.json())
-      .then(d => setCount(d.count))
-      .catch(() => {});
+    let called = false;
+    if (!called) {
+      called = true;
+      fetch('/api/views', { method: 'POST' })
+        .then(r => r.json())
+        .then(d => setCount(d.count))
+        .catch(() => {});
+    }
+    return () => { called = true; };
   }, []);
 
   if (count === null) return null;
