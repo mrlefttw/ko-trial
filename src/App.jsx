@@ -324,26 +324,49 @@ function SessionPicker({ current, onChange, isMobile, isGlobalSearch }) {
     );
   }
 
+  // 桌面版也用下拉選單，完整名稱太長不適合按鈕列
   return (
-    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
-      {SESSIONS.map(s => {
-        const active = s.id === current;
-        const conf = SPEAKERS[s.speaker];
-        return (
-          <button key={s.id} onClick={() => onChange(s.id)}
-            style={{
-              fontSize: '12px', padding: '5px 14px', cursor: 'pointer', transition: 'all 0.15s',
-              borderRadius: 'var(--radius-pill)',
-              border: `1px solid ${active ? conf.accent : 'var(--color-border)'}`,
-              color: active ? conf.accent : 'var(--color-text-muted)',
-              background: active ? conf.bg : 'transparent',
-              fontWeight: active ? 600 : 400, fontFamily: 'var(--font-ui)',
-            }}
-          >
-            {s.label} — {s.desc}
-          </button>
-        );
-      })}
+    <div style={{ position: 'relative' }}>
+      <button onClick={() => setOpen(!open)}
+        style={{
+          width: '100%', textAlign: 'left', padding: '8px 16px', fontSize: '14px',
+          background: 'var(--color-bg-card)', border: '1px solid var(--color-border)',
+          borderRadius: 'var(--radius-input)', fontFamily: 'var(--font-ui)', cursor: 'pointer',
+          display: 'flex', justifyContent: 'space-between', alignItems: 'center',
+        }}
+      >
+        <span><strong>{session?.label}</strong> — {session?.desc}</span>
+        <span style={{ color: 'var(--color-text-muted)' }}>▾</span>
+      </button>
+      {open && (
+        <>
+          <div onClick={() => setOpen(false)} style={{ position: 'fixed', inset: 0, zIndex: 49 }} />
+          <div style={{
+            position: 'absolute', zIndex: 50, top: '100%', left: 0, right: 0, marginTop: '4px',
+            background: 'var(--color-bg-card)', border: '1px solid var(--color-border)',
+            borderRadius: 'var(--radius-card)', boxShadow: '0 8px 24px rgba(0,0,0,0.12)',
+            maxHeight: '60vh', overflowY: 'auto',
+          }}>
+            {SESSIONS.map(s => {
+              const conf = SPEAKERS[s.speaker];
+              return (
+                <button key={s.id} onClick={() => { onChange(s.id); setOpen(false); }}
+                  style={{
+                    display: 'flex', alignItems: 'center', gap: '8px',
+                    width: '100%', textAlign: 'left', padding: '10px 16px', fontSize: '13px',
+                    borderBottom: '1px solid var(--color-border-light)', border: 'none', cursor: 'pointer',
+                    background: s.id === current ? conf.bg : 'transparent', fontFamily: 'var(--font-ui)',
+                  }}
+                >
+                  <span style={{ fontWeight: 600, minWidth: '70px' }}>{s.label}</span>
+                  <span style={{ color: 'var(--color-text-secondary)' }}>—</span>
+                  <span style={{ color: 'var(--color-text-muted)', fontSize: '12px' }}>{s.desc}</span>
+                </button>
+              );
+            })}
+          </div>
+        </>
+      )}
     </div>
   );
 }
@@ -560,37 +583,35 @@ export default function App() {
     <div style={{ minHeight: '100vh', background: 'var(--color-bg)', fontFamily: 'var(--font-ui)' }}>
       <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;600;700&family=Noto+Serif+TC:wght@400;600;700&display=swap" rel="stylesheet" />
 
-      {/* Header */}
+      {/* Header — 精簡版 */}
       <header style={{
         background: 'linear-gradient(180deg, var(--color-bg-header) 0%, var(--color-bg-header-end) 100%)',
-        color: 'var(--color-text-on-dark)', padding: '32px 24px 24px',
+        color: 'var(--color-text-on-dark)', padding: '16px 24px',
       }}>
-        <div style={{ maxWidth: 'var(--width-content)', margin: '0 auto' }}>
-          <div style={{ fontSize: '10px', letterSpacing: '3px', textTransform: 'uppercase', color: 'var(--color-text-on-dark-muted)', marginBottom: '8px', fontWeight: 500 }}>
-            公開法庭紀錄
+        <div style={{ maxWidth: 'var(--width-content)', margin: '0 auto', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <div>
+            <h1 style={{ fontSize: '16px', fontWeight: 700, margin: 0, fontFamily: 'var(--font-body)', lineHeight: 1.3 }}>
+              113年度金訴字第51號 言詞辯論逐字稿
+            </h1>
+            <div style={{ fontSize: '11px', color: 'var(--color-text-on-dark-muted)', marginTop: 4 }}>
+              臺北地方法院｜Whisper 自動轉錄（經校正，僅供參考）
+            </div>
           </div>
-          <h1 style={{ fontSize: '22px', fontWeight: 700, margin: '0 0 6px', fontFamily: 'var(--font-body)', lineHeight: 1.3 }}>
-            113年度金訴字第51號 言詞辯論逐字稿
-          </h1>
-          <div style={{ fontSize: '14px', color: 'var(--color-text-on-dark-secondary)', fontFamily: 'var(--font-body)', marginBottom: '8px' }}>
-            {isGlobalSearch ? '跨場次全文搜尋' : `${session?.label} — ${session?.desc}`}
-          </div>
-          <div style={{ fontSize: '11px', color: 'var(--color-text-on-dark-muted)', lineHeight: 1.5 }}>
-            臺灣臺北地方法院｜審判長 江俊彥、陪席 楊世賢、受命 許芳瑜<br />
-            來源：臺北地院刑事科 YouTube｜Whisper 自動轉錄（經校正，僅供參考）
+          <div style={{ fontSize: '13px', color: 'var(--color-text-on-dark-secondary)', fontFamily: 'var(--font-body)', textAlign: 'right' }}>
+            {isGlobalSearch ? '跨場次搜尋' : `${session?.label}`}
           </div>
         </div>
       </header>
 
       {/* Sticky toolbar */}
       <div style={{
-        position: 'sticky', top: 0, zIndex: 100,
+        position: 'sticky', top: 52, zIndex: 99,
         background: 'var(--color-bg)', borderBottom: '1px solid var(--color-border)',
-        padding: '12px 24px', backdropFilter: 'blur(10px)',
+        padding: '8px 24px', backdropFilter: 'blur(10px)',
       }}>
         <div style={{ maxWidth: 'var(--width-content)', margin: '0 auto' }}>
           {/* Session picker / global search indicator */}
-          <div style={{ marginBottom: '10px' }}>
+          <div style={{ marginBottom: '8px' }}>
             {isGlobalSearch ? (
               <SessionPicker current={sessionId} onChange={setSessionId} isGlobalSearch />
             ) : (
@@ -606,7 +627,7 @@ export default function App() {
           </div>
 
           {/* Search */}
-          <div style={{ position: 'relative', marginBottom: '10px' }}>
+          <div style={{ position: 'relative', marginBottom: '6px' }}>
             <input ref={searchRef} type="text" value={query} onChange={e => setQuery(e.target.value)}
               placeholder="搜尋全部 16 場逐字稿⋯（⌘K）"
               style={{
