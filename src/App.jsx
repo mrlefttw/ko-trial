@@ -229,7 +229,7 @@ function SectionNav({ sections }) {
           <div onClick={() => setOpen(false)} style={{ position: 'fixed', inset: 0, zIndex: 59 }} />
           <div style={{
             position: 'absolute', top: '100%', right: 0, marginTop: '4px', zIndex: 60,
-            background: 'var(--color-bg-card)', border: '1px solid var(--color-border)',
+            background: '#fff', border: '1px solid var(--color-border)',
             borderRadius: 'var(--radius-card)', boxShadow: '0 4px 16px rgba(0,0,0,0.12)',
             maxHeight: '50vh', overflowY: 'auto', minWidth: '200px',
           }}>
@@ -301,7 +301,7 @@ function SessionPicker({ current, onChange, isMobile, isGlobalSearch }) {
             <div onClick={() => setOpen(false)} style={{ position: 'fixed', inset: 0, zIndex: 49 }} />
             <div style={{
               position: 'absolute', zIndex: 50, top: '100%', left: 0, right: 0, marginTop: '4px',
-              background: 'var(--color-bg-card)', border: '1px solid var(--color-border)',
+              background: '#fff', border: '1px solid var(--color-border)',
               borderRadius: 'var(--radius-card)', boxShadow: '0 8px 24px rgba(0,0,0,0.12)',
               maxHeight: '60vh', overflowY: 'auto',
             }}>
@@ -348,8 +348,7 @@ function SessionPicker({ current, onChange, isMobile, isGlobalSearch }) {
           <div onClick={() => setOpen(false)} style={{ position: 'fixed', inset: 0, zIndex: 49 }} />
           <div style={{
             position: 'absolute', zIndex: 50, top: '100%', left: 0, right: 0, marginTop: '6px',
-            background: 'rgba(255,255,255,0.88)', border: '1px solid rgba(0,0,0,0.08)',
-            backdropFilter: 'saturate(180%) blur(20px)', WebkitBackdropFilter: 'saturate(180%) blur(20px)',
+            background: '#fff', border: '1px solid rgba(0,0,0,0.08)',
             borderRadius: 16, boxShadow: '0 12px 40px rgba(0,0,0,0.12)',
             maxHeight: '60vh', overflowY: 'auto',
           }}>
