@@ -22,44 +22,36 @@ export default function Landing() {
     <div>
       {/* ═══ Hero ═══ */}
       <section style={{
-        background: 'linear-gradient(135deg, #0f0f23 0%, #1a1a3e 40%, #2d1b4e 100%)',
-        color: '#fff', padding: '100px 20px 80px', textAlign: 'center',
         position: 'relative', overflow: 'hidden',
+        background: '#fdf6d8',
       }}>
-        {/* subtle grid overlay */}
+        <img
+          src="/聽判決-03.jpg"
+          alt="陪你聽判決 — 113年度金訴字第51號 貪污治罪條例等案件"
+          style={{
+            width: '100%', display: 'block',
+            maxHeight: 420, objectFit: 'cover', objectPosition: 'center',
+          }}
+        />
         <div style={{
-          position: 'absolute', inset: 0, opacity: 0.04,
-          backgroundImage: 'linear-gradient(rgba(255,255,255,.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.1) 1px, transparent 1px)',
-          backgroundSize: '60px 60px',
-        }} />
-        <div style={{ position: 'relative', maxWidth: 680, margin: '0 auto' }}>
-          <div style={{
-            fontSize: 13, letterSpacing: '0.2em', color: 'rgba(255,255,255,0.5)',
-            textTransform: 'uppercase', marginBottom: 20, fontWeight: 500,
-          }}>
-            113年度金訴字第51號
-          </div>
-          <h1 style={{
-            fontSize: 'clamp(36px, 6vw, 56px)', fontWeight: 800, margin: '0 0 16px',
-            lineHeight: 1.2, fontFamily: "'Noto Serif TC', serif",
-          }}>
-            陪你聽判決
-          </h1>
+          maxWidth: 680, margin: '0 auto',
+          padding: '32px 20px 48px', textAlign: 'center',
+        }}>
           <p style={{
-            fontSize: 'clamp(16px, 2.5vw, 20px)', color: 'rgba(255,255,255,0.65)',
+            fontSize: 'clamp(16px, 2.5vw, 20px)', color: '#444',
             margin: '0 0 12px', lineHeight: 1.6,
           }}>
             柯文哲京華城案 ── 一審全紀錄
           </p>
           <p style={{
-            fontSize: 14, color: 'rgba(255,255,255,0.35)', margin: '0 0 40px',
+            fontSize: 14, color: '#999', margin: '0 0 36px',
           }}>
             43 小時法庭辯論 &middot; 57 萬字逐字稿 &middot; 濃縮成你看得懂的版本
           </p>
           <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap' }}>
-            <Link to="/issues" style={heroBtn('#fff', '#0f0f23')}>核心爭點</Link>
-            <Link to="/daily" style={heroBtn('transparent', '#fff', true)}>每日摘要</Link>
-            <Link to="/verdict" style={heroBtn('transparent', '#fff', true)}>判決結果</Link>
+            <Link to="/issues" style={heroBtn('#1d1d1f', '#fff')}>核心爭點</Link>
+            <Link to="/daily" style={heroBtn('transparent', '#1d1d1f', true)}>每日摘要</Link>
+            <Link to="/verdict" style={heroBtn('transparent', '#1d1d1f', true)}>判決結果</Link>
           </div>
         </div>
       </section>
@@ -151,7 +143,7 @@ export default function Landing() {
           <NavCard to="/issues" label="核心爭點" desc="從 43 小時辯論中提煉的 8 個關鍵問題，檢辯雙方立場並排對照" tag="8 個爭點" />
           <NavCard to="/daily" label="每日摘要" desc="16 場法庭辯論的重點整理，每場 500 字幫你抓完重點" tag="16 場" />
           <NavCard to="/verdict" label="判決結果" desc="9 名被告的判決一覽，白話解讀罪名與刑度" tag="9 名被告" />
-          <NavCard to="/transcript" label="完整逐字稿" desc="57 萬字全文，可搜尋、可跳到 YouTube 對應片段" tag="57 萬字" />
+          <NavCard to="/transcript" label="完整逐字稿" desc="57 萬字全文，可搜尋、可跳到 YouTube 對應段落" tag="57 萬字" />
         </div>
       </section>
     </div>
@@ -230,7 +222,7 @@ function heroBtn(bg, color, outline = false) {
     display: 'inline-block', padding: '12px 28px', borderRadius: 6,
     background: bg, color: color, textDecoration: 'none',
     fontSize: 15, fontWeight: 600,
-    border: outline ? '1px solid rgba(255,255,255,0.3)' : 'none',
+    border: outline ? '1px solid rgba(0,0,0,0.15)' : 'none',
     transition: 'all 0.2s',
   };
 }

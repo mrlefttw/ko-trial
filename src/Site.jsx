@@ -1,6 +1,9 @@
 import { Routes, Route, Link, useLocation } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import About from './pages/About.jsx';
+import Daily from './pages/Daily.jsx';
+import Issues from './pages/Issues.jsx';
+import Verdict from './pages/Verdict.jsx';
 import App from './App.jsx';
 
 const NAV_ITEMS = [
@@ -35,13 +38,8 @@ function Nav() {
         height: 52,
       }}>
         <Link to="/" style={{
-          textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 10,
+          textDecoration: 'none', display: 'flex', alignItems: 'center',
         }}>
-          <div style={{
-            width: 28, height: 28, borderRadius: 8, background: '#ffe600',
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
-            fontSize: 14, fontWeight: 800, color: '#1d1d1f',
-          }}>聽</div>
           <span style={{
             fontWeight: 700, fontSize: 15, color: '#1d1d1f', letterSpacing: '-0.01em',
           }}>
@@ -71,8 +69,24 @@ export default function Site() {
   return (
     <>
       <Nav />
+      <div style={{
+        background: '#fdf6d8',
+        borderBottom: '1px solid rgba(0,0,0,0.06)',
+      }}>
+        <img
+          src="/聽判決-03.jpg"
+          alt="陪你聽判決 — 113年度金訴字第51號 貪污治罪條例等案件"
+          style={{
+            width: '100%', display: 'block',
+            maxHeight: 280, objectFit: 'cover', objectPosition: 'center',
+          }}
+        />
+      </div>
       <Routes>
         <Route path="/" element={<App />} />
+        <Route path="/daily" element={<Daily />} />
+        <Route path="/issues" element={<Issues />} />
+        <Route path="/verdict" element={<Verdict />} />
         <Route path="/about" element={<About />} />
       </Routes>
       <footer style={{
