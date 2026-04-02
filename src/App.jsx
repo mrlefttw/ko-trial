@@ -154,7 +154,7 @@ function SectionHeader({ time, title, id }) {
       padding: '24px 0 10px', fontFamily: 'var(--font-ui)',
     }}>
       <span style={{
-        background: 'var(--color-bg-header)', color: '#fff',
+        background: 'var(--color-bg-header)', color: 'var(--color-text-on-dark)',
         padding: '4px 12px', borderRadius: 'var(--radius-pill)',
         fontSize: '11px', fontFamily: 'var(--font-mono)', flexShrink: 0,
       }}>
@@ -215,7 +215,7 @@ function SectionNav({ sections }) {
         fontSize: '10px', padding: '3px 8px', borderRadius: '4px',
         border: `1px solid ${open ? 'var(--color-bg-header)' : 'var(--color-border)'}`,
         background: open ? 'var(--color-bg-header)' : 'var(--color-bg-card)',
-        color: open ? '#fff' : 'var(--color-text-secondary)',
+        color: open ? 'var(--color-text-on-dark)' : 'var(--color-text-secondary)',
         cursor: 'pointer', fontFamily: 'var(--font-ui)',
       }}>
         📑 章節 ({sections.length})
@@ -330,9 +330,9 @@ function SessionPicker({ current, onChange, isMobile, isGlobalSearch }) {
         const active = s.id === current;
         const conf = SPEAKERS[s.speaker];
         return (
-          <button key={s.id} onClick={() => onChange(s.id)} title={s.desc}
+          <button key={s.id} onClick={() => onChange(s.id)}
             style={{
-              fontSize: '12px', padding: '4px 12px', cursor: 'pointer', transition: 'all 0.15s',
+              fontSize: '12px', padding: '5px 14px', cursor: 'pointer', transition: 'all 0.15s',
               borderRadius: 'var(--radius-pill)',
               border: `1px solid ${active ? conf.accent : 'var(--color-border)'}`,
               color: active ? conf.accent : 'var(--color-text-muted)',
@@ -340,7 +340,7 @@ function SessionPicker({ current, onChange, isMobile, isGlobalSearch }) {
               fontWeight: active ? 600 : 400, fontFamily: 'var(--font-ui)',
             }}
           >
-            {s.label}
+            {s.label} — {s.desc}
           </button>
         );
       })}
@@ -668,7 +668,7 @@ export default function App() {
               fontSize: '10px', padding: '3px 8px', borderRadius: '4px',
               border: `1px solid ${showStats ? 'var(--color-bg-header)' : 'var(--color-border)'}`,
               background: showStats ? 'var(--color-bg-header)' : 'var(--color-bg-card)',
-              cursor: 'pointer', color: showStats ? '#fff' : 'var(--color-text-secondary)',
+              cursor: 'pointer', color: showStats ? 'var(--color-text-on-dark)' : 'var(--color-text-secondary)',
               fontFamily: 'var(--font-ui)',
             }}>📊 統計</button>
           </div>
