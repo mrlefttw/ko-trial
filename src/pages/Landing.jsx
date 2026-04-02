@@ -43,7 +43,7 @@ export default function Landing() {
             fontSize: 'clamp(36px, 6vw, 56px)', fontWeight: 800, margin: '0 0 16px',
             lineHeight: 1.2, fontFamily: "'Noto Serif TC', serif",
           }}>
-            陪你讀判決
+            陪你聽判決
           </h1>
           <p style={{
             fontSize: 'clamp(16px, 2.5vw, 20px)', color: 'rgba(255,255,255,0.65)',

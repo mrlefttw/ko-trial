@@ -52,7 +52,7 @@ function Nav() {
             fontWeight: 800, fontSize: 15, color: '#111', letterSpacing: '-0.02em',
             fontFamily: "'Noto Serif TC', serif",
           }}>
-            陪你讀判決
+            陪你聽判決
           </span>
         </Link>
 
@@ -126,7 +126,7 @@ export default function Site() {
           padding: '40px 20px', textAlign: 'center', lineHeight: 1.8,
         }}>
           <div style={{ color: 'rgba(255,255,255,0.7)', fontWeight: 600, marginBottom: 8, fontFamily: "'Noto Serif TC', serif" }}>
-            陪你讀判決
+            陪你聽判決
           </div>
           <p style={{ margin: '0 0 4px' }}>資料來源：臺北地院刑事科 YouTube</p>
           <p style={{ margin: 0 }}>逐字稿由 AI 自動轉錄並經人名校正，內容僅供參考</p>
