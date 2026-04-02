@@ -588,20 +588,6 @@ export default function App() {
     <div style={{ minHeight: '100vh', background: 'var(--color-bg)', fontFamily: 'var(--font-ui)' }}>
       <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;600;700&family=Noto+Serif+TC:wght@400;600;700&display=swap" rel="stylesheet" />
 
-      {/* Header */}
-      <header style={{
-        background: '#ffe600', padding: '20px 24px 16px',
-      }}>
-        <div style={{ maxWidth: 'var(--width-content)', margin: '0 auto' }}>
-          <h1 style={{ fontSize: '18px', fontWeight: 700, margin: '0 0 4px', color: '#1d1d1f', fontFamily: 'var(--font-body)', lineHeight: 1.3 }}>
-            113年度金訴字第51號
-          </h1>
-          <div style={{ fontSize: '13px', color: 'rgba(0,0,0,0.5)' }}>
-            {isGlobalSearch ? '跨場次全文搜尋' : `${session?.label} — ${session?.desc}`} ｜ 臺北地方法院
-          </div>
-        </div>
-      </header>
-
       {/* Sticky toolbar */}
       <div style={{
         position: 'sticky', top: 52, zIndex: 99,
