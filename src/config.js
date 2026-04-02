@@ -4,10 +4,10 @@
 
 // 發言者設定
 export const SPEAKERS = {
-  審判長: { icon: '🔨', accent: 'var(--color-judge)',    bg: 'var(--color-judge-bg)' },
-  檢察官: { icon: '⚖️', accent: 'var(--color-prosecutor)', bg: 'var(--color-prosecutor-bg)' },
-  辯護人: { icon: '📋', accent: 'var(--color-defense)',  bg: 'var(--color-defense-bg)' },
-  被告:   { icon: '🗣️', accent: 'var(--color-defendant)', bg: 'var(--color-defendant-bg)' },
+  審判長: { icon: '', accent: 'var(--color-judge)',    bg: 'var(--color-judge-bg)' },
+  檢察官: { icon: '', accent: 'var(--color-prosecutor)', bg: 'var(--color-prosecutor-bg)' },
+  辯護人: { icon: '', accent: 'var(--color-defense)',  bg: 'var(--color-defense-bg)' },
+  被告:   { icon: '', accent: 'var(--color-defendant)', bg: 'var(--color-defendant-bg)' },
 };
 
 // YouTube 影片 ID 對照（點時間戳可跳到影片）

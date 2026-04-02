@@ -87,7 +87,7 @@ function ParagraphCard({ para, paraKey, query, isExpanded, onToggle, sessionId, 
           {config.icon} {para.speaker}
         </span>
         <span style={{ fontSize: '12px', color: 'var(--color-text-muted)', fontFamily: 'var(--font-mono)', display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
-          🕐 {tsLabel}
+          {tsLabel}
         </span>
       </div>
 
@@ -117,28 +117,29 @@ function ParagraphCard({ para, paraKey, query, isExpanded, onToggle, sessionId, 
           <a href={ytLink} target="_blank" rel="noopener" onClick={e => e.stopPropagation()}
             style={{
               display: 'inline-flex', alignItems: 'center', gap: '6px',
-              fontSize: '12px', padding: '6px 14px',
-              borderRadius: 'var(--radius-pill)',
-              background: '#ff0000', color: '#fff',
-              textDecoration: 'none', fontWeight: 600, fontFamily: 'var(--font-ui)',
-              transition: 'opacity 0.15s',
+              fontSize: '12px', padding: '6px 16px',
+              borderRadius: 8,
+              background: '#1d1d1f', color: '#fff',
+              textDecoration: 'none', fontWeight: 500, fontFamily: 'var(--font-ui)',
+              transition: 'all 0.2s',
             }}
-            onMouseEnter={e => e.currentTarget.style.opacity = '0.85'}
-            onMouseLeave={e => e.currentTarget.style.opacity = '1'}
+            onMouseEnter={e => e.currentTarget.style.background = '#333'}
+            onMouseLeave={e => e.currentTarget.style.background = '#1d1d1f'}
           >
-            ▶ 觀看影片 {tsLabel}
+            觀看影片 {tsLabel}
           </a>
         )}
         <button onClick={handleCopyLink} style={{
           display: 'inline-flex', alignItems: 'center', gap: '4px',
-          fontSize: '12px', padding: '6px 12px',
-          borderRadius: 'var(--radius-pill)',
-          border: '1px solid var(--color-border)',
-          background: copied ? '#27ae60' : 'var(--color-bg)',
-          color: copied ? '#fff' : 'var(--color-text-secondary)',
-          cursor: 'pointer', fontFamily: 'var(--font-ui)', transition: 'all 0.15s',
+          fontSize: '12px', padding: '6px 14px',
+          borderRadius: 8,
+          border: 'none',
+          background: copied ? '#ffe600' : 'rgba(0,0,0,0.05)',
+          color: copied ? '#1d1d1f' : 'var(--color-text-secondary)',
+          cursor: 'pointer', fontFamily: 'var(--font-ui)', transition: 'all 0.2s',
+          fontWeight: copied ? 600 : 400,
         }}>
-          {copied ? '✓ 已複製' : '📋 複製連結'}
+          {copied ? '已複製' : '複製連結'}
         </button>
       </div>
     </div>
@@ -157,9 +158,9 @@ function SectionHeader({ time, title, id }) {
       padding: '24px 0 10px', fontFamily: 'var(--font-ui)',
     }}>
       <span style={{
-        background: 'var(--color-bg-header)', color: 'var(--color-text-on-dark)',
-        padding: '4px 12px', borderRadius: 'var(--radius-pill)',
-        fontSize: '11px', fontFamily: 'var(--font-mono)', flexShrink: 0,
+        background: '#ffe600', color: '#1d1d1f',
+        padding: '4px 12px', borderRadius: 8,
+        fontSize: '11px', fontFamily: 'var(--font-mono)', flexShrink: 0, fontWeight: 600,
       }}>
         {timeLabel}
       </span>
@@ -277,7 +278,7 @@ function SessionPicker({ current, onChange, isMobile, isGlobalSearch }) {
         background: 'var(--color-highlight)', fontSize: '13px',
         fontFamily: 'var(--font-ui)', color: 'var(--color-text)',
       }}>
-        🔍 跨場次搜尋中 — 顯示全部 16 場結果
+        跨場次搜尋中 — 顯示全部 16 場結果
       </div>
     );
   }
@@ -655,21 +656,22 @@ export default function App() {
               const active = speakerFilter.size === 0 || speakerFilter.has(speaker);
               return (
                 <button key={speaker} onClick={() => toggleSpeaker(speaker)} style={{
-                  fontSize: '12px', padding: '4px 12px', borderRadius: 'var(--radius-pill)',
-                  border: `1px solid ${active ? conf.accent : 'var(--color-border)'}`,
-                  background: active ? conf.bg : 'transparent',
+                  fontSize: '12px', padding: '5px 14px', borderRadius: 20,
+                  border: 'none',
+                  background: active ? conf.bg : 'rgba(0,0,0,0.03)',
                   color: active ? conf.accent : 'var(--color-text-muted)',
                   cursor: 'pointer', fontWeight: active ? 600 : 400,
-                  transition: 'all 0.15s', fontFamily: 'var(--font-ui)',
+                  transition: 'all 0.2s', fontFamily: 'var(--font-ui)',
+                  boxShadow: active ? `inset 0 0 0 1.5px ${conf.accent}40` : 'none',
                 }}>
-                  {conf.icon} {speaker}
+                  {speaker}
                 </button>
               );
             })}
 
             <span style={{ fontSize: '11px', color: 'var(--color-text-muted)', marginLeft: 'auto', fontFamily: 'var(--font-mono)' }}>
               {filteredParaCount} / {totalParaCount} 段
-              {isGlobalSearch && !allLoaded && ' (載入中⋯)'}
+              {isGlobalSearch && !allLoaded && ' (載入中...)'}
             </span>
 
             {!isGlobalSearch && (
@@ -677,11 +679,21 @@ export default function App() {
                 <button onClick={() => {
                   const keys = filteredCurrentItems.filter(i => i.type === 'para').map(i => i.paraKey);
                   setExpandedItems(new Set(keys));
-                }} style={{ fontSize: '10px', padding: '3px 8px', borderRadius: '4px', border: '1px solid var(--color-border)', background: 'var(--color-bg-card)', cursor: 'pointer', color: 'var(--color-text-secondary)', fontFamily: 'var(--font-ui)' }}>
+                }} style={{
+                  fontSize: '11px', padding: '5px 12px', borderRadius: 8,
+                  border: 'none', background: 'rgba(0,0,0,0.04)', cursor: 'pointer',
+                  color: 'var(--color-text-secondary)', fontFamily: 'var(--font-ui)',
+                  transition: 'all 0.15s',
+                }}>
                   全部展開
                 </button>
                 <button onClick={() => setExpandedItems(new Set())}
-                  style={{ fontSize: '10px', padding: '3px 8px', borderRadius: '4px', border: '1px solid var(--color-border)', background: 'var(--color-bg-card)', cursor: 'pointer', color: 'var(--color-text-secondary)', fontFamily: 'var(--font-ui)' }}>
+                  style={{
+                    fontSize: '11px', padding: '5px 12px', borderRadius: 8,
+                    border: 'none', background: 'rgba(0,0,0,0.04)', cursor: 'pointer',
+                    color: 'var(--color-text-secondary)', fontFamily: 'var(--font-ui)',
+                    transition: 'all 0.15s',
+                  }}>
                   全部收合
                 </button>
                 <SectionNav sections={sectionNav} />
@@ -689,17 +701,18 @@ export default function App() {
             )}
 
             <button onClick={() => setShowStats(!showStats)} style={{
-              fontSize: '10px', padding: '3px 8px', borderRadius: '4px',
-              border: `1px solid ${showStats ? 'var(--color-bg-header)' : 'var(--color-border)'}`,
-              background: showStats ? 'var(--color-bg-header)' : 'var(--color-bg-card)',
-              cursor: 'pointer', color: showStats ? 'var(--color-text-on-dark)' : 'var(--color-text-secondary)',
-              fontFamily: 'var(--font-ui)',
-            }}>📊 統計</button>
+              fontSize: '11px', padding: '5px 12px', borderRadius: 8,
+              border: 'none',
+              background: showStats ? '#ffe600' : 'rgba(0,0,0,0.04)',
+              cursor: 'pointer', color: showStats ? '#1d1d1f' : 'var(--color-text-secondary)',
+              fontFamily: 'var(--font-ui)', fontWeight: showStats ? 600 : 400,
+              transition: 'all 0.15s',
+            }}>統計</button>
           </div>
 
           {/* Stats */}
           {showStats && (
-            <div style={{ marginTop: '10px', padding: '12px 16px', background: 'var(--color-bg-card)', borderRadius: 'var(--radius-card)', border: '1px solid var(--color-border-light)' }}>
+            <div style={{ marginTop: '10px', padding: '14px 16px', background: 'rgba(255,255,255,0.6)', backdropFilter: 'blur(12px)', WebkitBackdropFilter: 'blur(12px)', borderRadius: 12, border: '1px solid rgba(0,0,0,0.04)' }}>
               <div style={{ fontSize: '11px', color: 'var(--color-text-secondary)', marginBottom: '8px', fontWeight: 600 }}>
                 發言統計 {isGlobalSearch && '（搜尋結果）'}
               </div>
@@ -729,7 +742,7 @@ export default function App() {
           <div style={{ textAlign: 'center', padding: '80px 20px', color: 'var(--color-text-muted)' }}>載入中⋯</div>
         ) : filteredParaCount === 0 ? (
           <div style={{ textAlign: 'center', padding: '60px 20px' }}>
-            <div style={{ fontSize: '32px', marginBottom: '12px' }}>🔍</div>
+            <div style={{ fontSize: '14px', marginBottom: '12px', color: 'var(--color-text-muted)' }}>找不到結果</div>
             <div style={{ fontSize: '14px', color: 'var(--color-text-muted)' }}>
               {isGlobalSearch ? `在 16 場辯論中找不到「${query}」` : `找不到符合條件的內容`}
             </div>
