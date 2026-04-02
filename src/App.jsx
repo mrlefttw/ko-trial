@@ -50,18 +50,21 @@ function ParagraphCard({ para, paraKey, query, isExpanded, onToggle, sessionId, 
       id={paraKey}
       onClick={() => onToggle(paraKey)}
       style={{
-        background: 'var(--color-bg-card)',
-        borderRadius: 'var(--radius-card)',
-        padding: '20px',
-        marginBottom: '12px',
+        background: isExpanded ? 'rgba(255,255,255,0.85)' : 'rgba(255,255,255,0.6)',
+        backdropFilter: 'blur(12px)',
+        WebkitBackdropFilter: 'blur(12px)',
+        borderRadius: 16,
+        padding: '18px 20px',
+        marginBottom: '10px',
         cursor: 'pointer',
-        transition: 'box-shadow 0.15s',
+        transition: 'all 0.2s ease',
+        border: isExpanded ? '1px solid rgba(255,230,0,0.4)' : '1px solid rgba(0,0,0,0.04)',
         boxShadow: isExpanded
-          ? '0 0 0 2px var(--color-bg-header), 0 2px 8px rgba(0,0,0,0.06)'
-          : '0 1px 3px rgba(0,0,0,0.04)',
+          ? '0 4px 24px rgba(0,0,0,0.06)'
+          : '0 1px 4px rgba(0,0,0,0.03)',
       }}
-      onMouseEnter={e => { if (!isExpanded) e.currentTarget.style.boxShadow = '0 2px 8px rgba(0,0,0,0.08)'; }}
-      onMouseLeave={e => { if (!isExpanded) e.currentTarget.style.boxShadow = '0 1px 3px rgba(0,0,0,0.04)'; }}
+      onMouseEnter={e => { if (!isExpanded) { e.currentTarget.style.background = 'rgba(255,255,255,0.8)'; e.currentTarget.style.boxShadow = '0 4px 16px rgba(0,0,0,0.06)'; }}}
+      onMouseLeave={e => { if (!isExpanded) { e.currentTarget.style.background = 'rgba(255,255,255,0.6)'; e.currentTarget.style.boxShadow = '0 1px 4px rgba(0,0,0,0.03)'; }}}
     >
       {/* Top: badges */}
       <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: '8px', marginBottom: '12px' }}>
@@ -329,9 +332,10 @@ function SessionPicker({ current, onChange, isMobile, isGlobalSearch }) {
     <div style={{ position: 'relative' }}>
       <button onClick={() => setOpen(!open)}
         style={{
-          width: '100%', textAlign: 'left', padding: '8px 16px', fontSize: '14px',
-          background: 'var(--color-bg-card)', border: '1px solid var(--color-border)',
-          borderRadius: 'var(--radius-input)', fontFamily: 'var(--font-ui)', cursor: 'pointer',
+          width: '100%', textAlign: 'left', padding: '10px 16px', fontSize: '14px',
+          background: 'rgba(255,255,255,0.7)', border: '1px solid rgba(0,0,0,0.08)',
+          backdropFilter: 'blur(12px)', WebkitBackdropFilter: 'blur(12px)',
+          borderRadius: 12, fontFamily: 'var(--font-ui)', cursor: 'pointer',
           display: 'flex', justifyContent: 'space-between', alignItems: 'center',
         }}
       >
@@ -342,9 +346,10 @@ function SessionPicker({ current, onChange, isMobile, isGlobalSearch }) {
         <>
           <div onClick={() => setOpen(false)} style={{ position: 'fixed', inset: 0, zIndex: 49 }} />
           <div style={{
-            position: 'absolute', zIndex: 50, top: '100%', left: 0, right: 0, marginTop: '4px',
-            background: 'var(--color-bg-card)', border: '1px solid var(--color-border)',
-            borderRadius: 'var(--radius-card)', boxShadow: '0 8px 24px rgba(0,0,0,0.12)',
+            position: 'absolute', zIndex: 50, top: '100%', left: 0, right: 0, marginTop: '6px',
+            background: 'rgba(255,255,255,0.88)', border: '1px solid rgba(0,0,0,0.08)',
+            backdropFilter: 'saturate(180%) blur(20px)', WebkitBackdropFilter: 'saturate(180%) blur(20px)',
+            borderRadius: 16, boxShadow: '0 12px 40px rgba(0,0,0,0.12)',
             maxHeight: '60vh', overflowY: 'auto',
           }}>
             {SESSIONS.map(s => {
@@ -583,22 +588,16 @@ export default function App() {
     <div style={{ minHeight: '100vh', background: 'var(--color-bg)', fontFamily: 'var(--font-ui)' }}>
       <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;600;700&family=Noto+Serif+TC:wght@400;600;700&display=swap" rel="stylesheet" />
 
-      {/* Header — 精簡版 */}
+      {/* Header */}
       <header style={{
-        background: 'linear-gradient(180deg, var(--color-bg-header) 0%, var(--color-bg-header-end) 100%)',
-        color: 'var(--color-text-on-dark)', padding: '16px 24px',
+        background: '#ffe600', padding: '20px 24px 16px',
       }}>
-        <div style={{ maxWidth: 'var(--width-content)', margin: '0 auto', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <div>
-            <h1 style={{ fontSize: '16px', fontWeight: 700, margin: 0, fontFamily: 'var(--font-body)', lineHeight: 1.3 }}>
-              113年度金訴字第51號 言詞辯論逐字稿
-            </h1>
-            <div style={{ fontSize: '11px', color: 'var(--color-text-on-dark-muted)', marginTop: 4 }}>
-              臺北地方法院｜Whisper 自動轉錄（經校正，僅供參考）
-            </div>
-          </div>
-          <div style={{ fontSize: '13px', color: 'var(--color-text-on-dark-secondary)', fontFamily: 'var(--font-body)', textAlign: 'right' }}>
-            {isGlobalSearch ? '跨場次搜尋' : `${session?.label}`}
+        <div style={{ maxWidth: 'var(--width-content)', margin: '0 auto' }}>
+          <h1 style={{ fontSize: '18px', fontWeight: 700, margin: '0 0 4px', color: '#1d1d1f', fontFamily: 'var(--font-body)', lineHeight: 1.3 }}>
+            113年度金訴字第51號
+          </h1>
+          <div style={{ fontSize: '13px', color: 'rgba(0,0,0,0.5)' }}>
+            {isGlobalSearch ? '跨場次全文搜尋' : `${session?.label} — ${session?.desc}`} ｜ 臺北地方法院
           </div>
         </div>
       </header>
@@ -606,8 +605,11 @@ export default function App() {
       {/* Sticky toolbar */}
       <div style={{
         position: 'sticky', top: 52, zIndex: 99,
-        background: 'var(--color-bg)', borderBottom: '1px solid var(--color-border)',
-        padding: '8px 24px', backdropFilter: 'blur(10px)',
+        background: 'rgba(245, 245, 247, 0.75)',
+        backdropFilter: 'saturate(180%) blur(20px)',
+        WebkitBackdropFilter: 'saturate(180%) blur(20px)',
+        borderBottom: '1px solid rgba(0,0,0,0.06)',
+        padding: '10px 24px',
       }}>
         <div style={{ maxWidth: 'var(--width-content)', margin: '0 auto' }}>
           {/* Session picker / global search indicator */}
@@ -632,8 +634,9 @@ export default function App() {
               placeholder="搜尋全部 16 場逐字稿⋯（⌘K）"
               style={{
                 width: '100%', padding: '10px 16px', fontSize: '14px',
-                border: '1px solid var(--color-border)', borderRadius: 'var(--radius-input)',
-                outline: 'none', background: 'var(--color-bg-card)',
+                border: '1px solid rgba(0,0,0,0.08)', borderRadius: 12,
+                outline: 'none', background: 'rgba(255,255,255,0.7)',
+                backdropFilter: 'blur(8px)', WebkitBackdropFilter: 'blur(8px)',
                 fontFamily: 'var(--font-ui)', boxSizing: 'border-box',
               }}
             />

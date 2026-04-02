@@ -10,27 +10,24 @@ const NAV_ITEMS = [
 
 function Nav() {
   const location = useLocation();
-  const [open, setOpen] = useState(false);
-  const [isMobile, setIsMobile] = useState(window.innerWidth < 720);
-  const [scrolled, setScrolled] = useState(false);
   const current = location.pathname;
+  const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    const onResize = () => setIsMobile(window.innerWidth < 720);
     const onScroll = () => setScrolled(window.scrollY > 10);
-    window.addEventListener('resize', onResize);
     window.addEventListener('scroll', onScroll);
-    return () => { window.removeEventListener('resize', onResize); window.removeEventListener('scroll', onScroll); };
+    return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
   return (
     <nav style={{
       position: 'sticky', top: 0, zIndex: 100,
-      background: scrolled ? 'rgba(255,255,255,0.96)' : 'rgba(255,255,255,0.88)',
-      backdropFilter: 'blur(16px)',
-      borderBottom: scrolled ? '1px solid #e5e5e5' : '1px solid transparent',
+      background: 'rgba(255, 255, 255, 0.65)',
+      backdropFilter: 'saturate(180%) blur(20px)',
+      WebkitBackdropFilter: 'saturate(180%) blur(20px)',
+      borderBottom: '1px solid rgba(0,0,0,0.06)',
       padding: '0 24px',
-      transition: 'all 0.2s',
+      transition: 'all 0.3s',
     }}>
       <div style={{
         maxWidth: 960, margin: '0 auto',
@@ -38,24 +35,28 @@ function Nav() {
         height: 52,
       }}>
         <Link to="/" style={{
-          textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 8,
+          textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 10,
         }}>
+          <div style={{
+            width: 28, height: 28, borderRadius: 8, background: '#ffe600',
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            fontSize: 14, fontWeight: 800, color: '#1d1d1f',
+          }}>聽</div>
           <span style={{
-            fontWeight: 800, fontSize: 15, color: '#111', letterSpacing: '-0.02em',
-            fontFamily: "'Noto Serif TC', serif",
+            fontWeight: 700, fontSize: 15, color: '#1d1d1f', letterSpacing: '-0.01em',
           }}>
             陪你聽判決
           </span>
         </Link>
 
-        <div style={{ display: 'flex', gap: 0 }}>
+        <div style={{ display: 'flex', gap: 4 }}>
           {NAV_ITEMS.map(item => (
             <Link key={item.path} to={item.path} style={{
-              textDecoration: 'none', padding: '6px 16px',
+              textDecoration: 'none', padding: '6px 16px', borderRadius: 20,
               fontSize: 14, fontWeight: current === item.path ? 600 : 400,
-              color: current === item.path ? '#111' : '#888',
-              borderBottom: current === item.path ? '2px solid #ffe600' : '2px solid transparent',
-              transition: 'all 0.15s',
+              color: current === item.path ? '#1d1d1f' : '#6e6e73',
+              background: current === item.path ? 'rgba(255, 230, 0, 0.2)' : 'transparent',
+              transition: 'all 0.2s',
             }}>
               {item.label}
             </Link>
@@ -75,10 +76,18 @@ export default function Site() {
         <Route path="/about" element={<About />} />
       </Routes>
       <footer style={{
-        background: '#111', color: 'rgba(255,255,255,0.4)', fontSize: 13,
-        padding: '40px 20px', textAlign: 'center', lineHeight: 1.8,
+        background: 'rgba(255, 255, 255, 0.6)',
+        backdropFilter: 'blur(20px)',
+        WebkitBackdropFilter: 'blur(20px)',
+        borderTop: '1px solid rgba(0,0,0,0.06)',
+        color: '#6e6e73', fontSize: 13,
+        padding: '32px 20px', textAlign: 'center', lineHeight: 1.8,
       }}>
-        <div style={{ color: '#ffe600', fontWeight: 600, marginBottom: 8, fontFamily: "'Noto Serif TC', serif" }}>
+        <div style={{
+          display: 'inline-block', padding: '4px 12px', borderRadius: 8,
+          background: '#ffe600', color: '#1d1d1f', fontWeight: 700, fontSize: 13,
+          marginBottom: 12,
+        }}>
           陪你聽判決
         </div>
         <p style={{ margin: '0 0 4px' }}>資料來源：臺北地院刑事科 YouTube</p>
